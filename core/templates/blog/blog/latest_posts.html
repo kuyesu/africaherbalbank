@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% load wagtailimages_tags %}
+
+{% block content %}
+ <section class="post-wrapper-top">
+    <div class="container">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <ul class="breadcrumb">
+          <li><a href="index.html">Home</a></li>
+          <li>Single Portfolio Style 1</li>
+        </ul>
+        <h2>LATEST POSTS</h2>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <!-- search -->
+        <div class="search-bar">
+          <form action="" method="get">
+            <fieldset>
+              <input type="image" src="img/pixel.gif" class="searchsubmit" alt="" />
+              <input type="text" class="search_text showtextback" name="s" id="s" value="Search..." />
+            </fieldset>
+          </form>
+        </div>
+        <!-- / end div .search-bar -->
+      </div>
+    </div>
+  </section>
+  <!-- end post-wrapper-top -->
+
+
+    <section class="section1">
+    <div class="container clearfix">
+    {% for post in posts%}
+      <div class="content col-lg-12 col-md-12 col-sm-12 clearfix">
+        
+        <div class="col-lg-8 col-md-8 col-sm-12">
+          <div class="item_image">
+          {% image post.banner_image fill-500x500 as blog_img %}
+             <a href="{{ post.url }}">
+            <img class="img-responsive aligncenter" src="{{ blog_img.url }}" alt="{{ blog_img.alt}}">
+            </a>
+          </div>
+          <!-- end item_image -->
+        </div>
+        <!-- end col-lg 8 -->
+
+        <div class="col-lg-4 col-md-4 col-sm-4">
+          <div class="portfolio_details">
+            <div class="details_section">
+            
+              <h3>{{ post.custom_title }}</h3>
+              {% if post.specific.subtitle %}
+                            <p>{{ post.specific.subtitle }}</p>
+                        {% endif %}
+
+              <hr>
+              
+              {% comment %} {% for iter in self.blog_authors.all %} {% endcomment %}
+              {% if self.blog_authors.all %}
+                        <a href="{{ author.website }}">
+                            {{ author.name }}
+                        </a>
+                    {% else %}
+                        {{ iter.author.name }}
+                    {% endif %}
+              <ul>
+                <li class="version">Author: <span><a href="{{ iter.author.name }}">{{ blog_authors.author.name }}</a></span></li>
+                <li class="update">Website: <span><a href="#">{{ iter.author.name }}</a>{{ iter}} <a href="#"></a></span></li>
+                <li class="release">Release Date: <span>{{ iter.author.name }}</span></li>
+                
+              </ul>
+              {% comment %} {% endfor %} {% endcomment %}
+              <a href="{{ post.url }}">
+                        {# @todo add a summary field to BlogDetailPage; make it a RichTextField with only Bold and Italic enabled. #}
+                        <a href="{{ post.url }}" class="btn btn-primary mt-4">Read More</a>
+                    </a>
+            
+            </div>
+        
+            <!-- details section -->
+          </div>
+          
+          <!-- theme details -->
+        </div>
+        <!-- end col-lg 8 -->
+        
+        <div class="clearfix"></div>
+        
+        
+        
+      </div>
+      {% endfor %}
+      <ul class="pager">
+          <li class="previous">
+            <a href="#">← Older</a>
+          </li>
+          <li class="next">
+            <a href="#">Newer →</a>
+          </li>
+        </ul>
+      <!-- end content -->
+    </div>
+    <!-- end container -->
+  </section>
+  <!-- end section -->
+{% endblock content %}

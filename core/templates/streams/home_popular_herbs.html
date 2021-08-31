@@ -1,0 +1,33 @@
+{% load wagtailimages_tags wagtailcore_tags %}
+
+
+    {% for Popular_herbs_card in self.Popular_herbs_cards %}
+      {% image Popular_herbs_card.image fill-380x200 as img %}
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <div class="dmbox">
+          
+            <div class="dm-icon-effect-1" data-effect="slide-bottom">
+              <a><img src="{{ img.url }}" alt="{{ img.alt }}" class="card-img-top" style="border-radius: 4px 4px 0px 0px;" /></a>
+            </div>
+          
+          <h4 style="
+          color: #fff; 
+          background: rgb(122,117,6); 
+          margin-top: 0px; min-height: 50px;
+          border-radius: 0px 0px 4px 4px;
+          ">{{ Popular_herbs_card.title }}</h4>
+          <p>{{ Popular_herbs_card.text}}</p>
+          {% if Popular_herbs_card.button_page %}
+                        <a href="{{ Popular_herbs_card.button_page.url }}" class="btn btn-primary" style="color: #fff; background: rgb(122,117,6);">
+                            Learn More
+                        </a>
+                    {% elif Popular_herbs_card.button_url %}
+                        <a href="{{ Popular_herbs_card.button_url }}" class="btn btn-primary" style="color: #fff; background: rgb(122,117,6);">
+                            Learn More
+                        </a>
+                    {% endif %}
+        </div>
+      </div>
+      <!-- end dmbox -->
+    <div style="padding-top: 4px;"></div>
+    {% endfor %}

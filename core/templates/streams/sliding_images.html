@@ -1,0 +1,23 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% for Sliding_Image in self.Sliding_Images %} 
+{% image Sliding_Image.image fill-300x200 as img%}   
+<div class="item">
+<a data-rel="prettyPhoto" href="{{img.url}}">
+  <img class="lazyOwl" src="{{img.url}}" data-src="{{img.url}}" alt="{{img.alt}}">
+    <div>
+      <small>{{Sliding_Image.title}}</small>
+      <span>{{Sliding_Images.text}}</span>
+      <i class="fa fa-search">
+      {% if Sliding_Image.button_page %}
+        <a href="{{ Sliding_Image.button_page.url}}"></a> 
+      {% elif Sliding_Image.button_url%}
+        <a href="{{ Sliding_Image.button_url.url}}"></a> 
+
+      {% endif %}
+          </i>
+      </div>
+  </a>
+</div>
+
+{% endfor %} 

@@ -1,0 +1,259 @@
+{% extends "base.html" %}
+
+{% load wagtailimages_tags wagtailcore_tags %}
+{% load wagtailimages_tags widget_tweaks comments comments_xtd static %}
+
+
+{% block content %}
+<section class="section">
+  <div class="container clearfix">
+    <div class=" col-lg-12 col-md-12 col-sm-12 clearfix">
+      <div class="divider"></div>
+        <nav class="portfolio-filter clearfix">
+          <h2>{% if self.custom_title %}
+                    {{ self.custom_title }}
+                {% else %}
+                    {{ self.title }}
+                {% endif %}</h2>
+        </nav>
+      </div>
+    </div>
+  
+  </div> 
+</section>
+
+
+
+    <section class="section1">
+    <div class="container clearfix">
+      <div class="content col-lg-8 col-md-8 col-sm-8 col-xs-12 clearfix">
+
+        <!-- SLIDE POST -->
+        <article class="blog-wrap">
+          <div class="blog-media">
+            <div id="myCarousel" class="carousel slide">
+              <div class="carousel-inner">
+                <div class="item active">
+                 {% image self.intro_image fill-1400x1400 as intro_img %}
+                    <img src="{{ intro_img.url }}" alt="{{ intro_img.alt }}">
+              </div>
+              
+          </div>
+
+          <header class="page-header blog-title">
+            <h3 class="general-title"> {% if self.custom_title %}
+                    {{ self.custom_title }}
+                {% else %}
+                    {{ self.title }}
+                {% endif %}</h3>
+            <div class="post-meta">
+              <p>
+                Published at: <span class="publish-on">@to do here</span>
+                <span class="sep">/</span> Category:  {% if self.categories.count %}
+                
+                    {% for cat in self.categories.all %}
+                        <a href="?category={{ cat.slug }}">
+                            {{ cat.name }}
+                        </a>{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                   
+            {% endif %}
+                <span class="sep">/</span> Author:  {% for iter in self.blog_authors.all %}
+                    {% if iter.author.website %}
+                        <a href="{{ iter.author.website }}">
+                            {{ iter.author.name }}
+                        </a>
+                    {% else %}
+                        {{ iter.author.name }}
+                    {% endif %}
+                    </div>
+                {% endfor %}</a>
+              </p>
+            </div>
+
+            <div class="post-desc">
+            <p>{% for block in self.content %}
+                    {% include_block block %}
+                {% endfor %}</p>
+            
+        </div>
+          </header>
+        
+        </article>
+
+        <div class="author_box clearfix">
+
+         {% for iter in self.blog_authors.all %}
+                    {% image iter.author.image fill-50x50 as img %}
+                    
+                    <img src="{{ img.url }}" class="img-circle alignleft" width="100"alt="{{ iter.author.name }}">
+                    
+          <h4>Posted by 
+                    {% if iter.author.website %}
+                        <a href="{{ iter.author.website }}">
+                            {{ iter.author.name }}
+                        </a>
+                    {% else %}
+                        {{ iter.author.name }}
+                    {% endif %}
+                    </h4>
+
+                    
+          <p>LLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen
+            book.</p>
+          <div class="social_buttons">
+            <a href="single-with-sidebar.html#" data-toggle="tooltip" data-placement="bottom" title="Facebook"><i class="fa fa-facebook"></i></a>
+            <a href="single-with-sidebar.html#" data-toggle="tooltip" data-placement="bottom" title="Twitter"><i class="fa fa-twitter"></i></a>
+            <a href="single-with-sidebar.html#" data-toggle="tooltip" data-placement="bottom" title="Google+"><i class="fa fa-google-plus"></i></a>
+            <a href="single-with-sidebar.html#" data-toggle="tooltip" data-placement="bottom" title="Dribbble"><i class="fa fa-dribbble"></i></a>
+          </div>
+        </div>
+        {% endfor %}
+        <!-- end author_box -->
+
+
+
+      </div>
+      <!-- end content -->
+
+
+      <!-- SIDEBAR -->
+      <div id="sidebar" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+
+        <div class="widget">
+          <h4 class="title">
+                        <span>Subscribe</span>
+                    </h4>
+          <form id="subscribe" action="mc.php" name="subscribe" method="post">
+            <input type="text" name="name" id="name" class="form-control" placeholder="Name">
+            <input type="text" name="email" id="email" class="form-control" placeholder="Email">
+            <div class="pull-right">
+              <input type="submit" value="Subscribe" id="submit" class="button">
+            </div>
+          </form>
+        </div>
+
+        <div class="widget">
+          <h4 class="title">
+                    	<span>Recent Posts</span>
+                    </h4>
+          <div class="tabbable">
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="left-sidebar.html#recent" data-toggle="tab">Recent</a></li>
+              <li><a href="left-sidebar.html#popular" data-toggle="tab">Popular</a></li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane active" id="recent">
+                <ul class="recent_posts">
+                  <li>
+                    <a href="#">
+                                    <img src="img/recent_post_01.png" alt="" />Our New Dashboard Is Here
+                                    </a>
+                    <a class="readmore" href="#">read more</a>
+                  </li>
+                  <li>
+                    <a href="#">
+                                    <img src="img/recent_post_02.png" alt="" />Design Is In The Air
+                                    </a>
+                    <a class="readmore" href="#">read more</a>
+                  </li>
+                </ul>
+                <!-- recent posts -->
+              </div>
+              <div class="tab-pane" id="popular">
+                <ul class="recent_posts">
+                  <li>
+                    <a href="#">
+                                    <img src="img/flickr_01.jpg" alt="" />Blog Post With Image
+                                    </a>
+                    <a class="readmore" href="#">read more</a>
+                  </li>
+                  <li>
+                    <a href="#">
+                                    <img src="img/flickr_02.jpg" alt="" />Another Recent Post with Image
+                                    </a>
+                    <a class="readmore" href="#">read more</a>
+                  </li>
+                </ul>
+                <!-- recent posts -->
+              </div>
+            </div>
+          </div>
+          <!-- tabbable -->
+        </div>
+        <!-- end widget -->
+
+
+        <div class="widget">
+          <h4 class="title">
+                        <span>Categories</span>
+                    </h4>
+          <ul class="categories">
+            <li>{% for cat in categories %}
+              {{ cat.name }}</a>
+            {% endfor %}</a></li>
+            
+          </ul>
+        </div>
+
+        <div class="widget">
+          <h4 class="title">
+                        <span>Pages</span>
+                    </h4>
+          <ul class="pages">
+          
+                  <li>
+                    {% for item in navigation.menu_items.all %}
+                      <a href="{{ item.link }}">{{ item.title }}</a>
+                    {% endfor %}
+                  </li>
+                
+          </ul>
+        </div>
+
+        <div class="widget">
+          <h4 class="title">
+                        <span>Tags</span>
+                    </h4>
+
+          <div class="tagcloud">
+           {% if page.tags.count %}
+        
+                {% for tag in page.tags.all %}
+            {# Loop through all the existing tags #}
+                    <a href="/blog/?tag={{ tag.slug }}">{{ tag }}</a>
+                {% endfor %}
+            {% endif %}</a>
+            
+          </div>
+        </div>
+
+      </div>
+      <!-- end sidebar -->
+    </div>
+    <!-- end container -->
+  </section>
+  <!-- end section -->
+
+{% comment %} <form method="post" id="comment-new">
+    {% csrf_token %}
+    {{ form.as_p }}     
+    <button type="submit">Send</button>
+</form> {% endcomment %}
+
+
+<div class="container-fluid mt-4 comment-form">
+    {% render_comment_form for page %}
+</div>
+
+{% get_comment_count for page as comment_count %}
+{% if comment_count %}
+    <hr>
+    <div class="container-fluid mt-4 media-list">
+        {% render_xtdcomment_tree for page allow_feedback show_feedback %}
+    </div>
+
+    
+{% endif %}
+
+{% endblock %}

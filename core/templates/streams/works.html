@@ -1,0 +1,31 @@
+{% load wagtailimages_tags wagtailcore_tags %}
+
+<section class="pb-6">
+    <div class="container">
+      <div class="row text-start">
+        <div class="col-lg-6">
+          <h3 class="mt-4">
+            <span class="text-gradient text-primary">{{ self.title}}</span>
+          </h3>
+        </div>
+      </div>
+      <div class="row mt-3">
+      {% for work in self.our_work %}
+            {% image work.image fill-300x200 as img %}
+        <div class="col-lg-4 mb-lg-0 mb-4">
+          <!-- Start Card Blog Fullbackground - text centered -->
+          <a href="javascript:;">
+            <div class="card card-background move-on-hover">
+              <div class="full-background" style="background-image: url('{{img.url}}')"></div>
+              <div class="card-body pt-12">
+                <h4 class="text-white">{{work.title}}</h4>
+                <p>{{work.text}}</p>
+              </div>
+            </div>
+          </a>
+          <!-- End Card Blog Fullbackground - text centered -->
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>

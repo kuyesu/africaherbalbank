@@ -1,0 +1,42 @@
+{% load static %}
+{% load wagtailimages_tags static %}
+<section class="py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 mx-auto text-center">
+        <h2 class="text-gradient text-primary mb-0">{{self.title}}</h2>
+        
+        <p>{{self.subtitle}}</p>
+      </div>
+    </div>
+    <div class="row mt-6">
+    {% for card in self.Testimonies_card %}
+      {% image card.image fill-320x320 as img %}
+      <div class="col-lg-4 col-md-8">
+        <div class="card card-plain">
+          <div class="card-body">
+            <div class="author">
+              <img src="{{img.url}}" alt="img.alt" class="avatar shadow">
+              <div class="name ps-2">
+                <span>{{card.Name}}</span>
+                <div class="stats">
+                  
+                </div>
+              </div>
+            </div>
+            <p class="mt-4">"{{card.text}}"</p>
+            <div class="rating mt-3">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="far fa-star"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+  
+    </div>
+  </div>
+</section>

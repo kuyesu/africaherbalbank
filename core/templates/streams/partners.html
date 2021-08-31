@@ -1,0 +1,19 @@
+{% load static %}
+{% load wagtailimages_tags static %}
+<div class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-8 mx-auto text-center">
+          <h4 class="font-weight-bolder"> {{self.title}}</h4>
+        </div>
+      </div>
+      <div class="row mt-4">
+      {% for card in self.patners %}
+      {% image card.image fill-320x320 as img %}
+        <div class="col-lg-2 col-md-4 col-6 mb-4">
+          <img class="w-100 opacity-9" src="{{img.url}}" alt="{{img.alt}}">
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>

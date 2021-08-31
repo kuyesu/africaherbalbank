@@ -1,0 +1,25 @@
+
+
+  {% load static %}
+{% load wagtailimages_tags wagtailcore_tags %}
+<section class="py-sm-7 py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <h2>{{self.title}}</h2>
+          <p>{{self.brief_description}}</p>
+        </div>
+      </div>
+      <div class="row mt-5">
+      {% for event in self.upcoming_events %}
+            {% image event.image fill-300x200 as img %}
+        <div class="col-sm-6 col-lg-4 mt-lg-0 mt-4">
+          <img class="width-48-px mb-3" src="{{img.url}}" alt="{{img.alt}}">
+          <h5>{{event.title}}</h5>
+          <p class="text-sm">{{event.text}}</p>
+          <a href="javascript:;" class="btn btn-outline-secondary btn-sm">Apply here</a>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>

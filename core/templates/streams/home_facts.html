@@ -1,0 +1,24 @@
+{% load wagtailimages_tags wagtailcore_tags %}
+  
+{% for Herbs_Facts_card in self.Herbs_Facts_cards %}
+  {% image Herbs_Facts_card.image width-900 as img %}
+  <div class="services_lists_boxes clearfix">
+  <div class="col-lg-3 col-md-3 col-sm-12">
+    <div class="services_lists_boxes_icon_none" data-effect="slide-bottom">
+      <a href="{{page.url}}" class=""><img src="{{img.url}}" alt="{{img.alt}}"></img> </a>
+    </div>
+  </div>
+  <div class="col-lg-9 col-md-9 col-sm-9">
+    <div class="servicetitle">
+      <h4>{{ Herbs_Facts_card.title }}</h4>
+      <hr>
+    </div>
+    <p>{{ Herbs_Facts_card.text }}</p>
+  </div>
+</div>
+<!-- services_lists_boxes -->
+{% endfor %}
+
+
+ 
+  

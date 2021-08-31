@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% load wagtailimages_tags wagtailcore_tags %}
+
+{% block content %}
+<section class="section">
+  <div class="container clearfix">
+    <div class=" col-lg-12 col-md-12 col-sm-12 clearfix">
+      <div class="divider"></div>
+        <nav class="portfolio-filter clearfix">
+          <h2>{% if self.custom_title %}
+                    {{ self.custom_title }}
+                {% else %}
+                    {{ self.title }}
+                {% endif %}</h2>
+        </nav>
+      </div>
+    </div>
+  
+  </div> 
+</section>
+
+
+
+
+<!-- VIDEO POST -->
+      <article class="blog-wrap text-center">
+        <div class="blog-media">
+          <div class="js-video [vimeo, widescreen]">
+            <iframe width="400" height="200" src="https://www.youtube.com/embed/{{ self.youtube_video_id }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <header class="page-header blog-title">
+          <div class="author-wrap">
+            <span class="inside">
+				{% for iter in self.blog_authors.all %}
+                    {% image iter.author.image fill-50x50 as img %}
+                    <div>
+                        <img src="{{ img.url }}" class="rounded-circle" alt="{{ iter.author.name }}">
+                    </div>
+                    {% if iter.author.website %}
+                        <a href="{{ iter.author.website }}">
+                            {{ iter.author.name }}
+                        </a>
+                    {% else %}
+                        {{ iter.author.name }}
+                    {% endif %}
+                    </div>
+                {% endfor %}
+							</span>
+          </div>
+          <h3 class="general-title">{% if self.custom_title %}
+                    {{ self.custom_title }}
+                {% else %}
+                    {{ self.title }}
+                {% endif %}</h3></h3>
+          <div class="post-meta">
+            <p>
+              Published at: <span class="publish-on">@TO DO</span>
+              <span class="sep">|</span> Category: Category:  {% if self.categories.count %}
+                
+                    {% for cat in self.categories.all %}
+                        <a href="?category={{ cat.slug }}">
+                            {{ cat.name }}
+                        </a>{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                   
+            {% endif %}</a>
+              <span class="sep">|</span>  Author:  {% for iter in self.blog_authors.all %}
+                    {% if iter.author.website %}
+                        <a href="{{ iter.author.website }}">
+                            {{ iter.author.name }}
+                        </a>
+                    {% else %}
+                        {{ iter.author.name }}
+                    {% endif %}
+                    </div>
+                {% endfor %}</a></a>
+            </p>
+          </div>
+        </header>
+
+        <div class="post-desc">
+          <p>{% for block in self.content %}
+                    {% include_block block %}
+                {% endfor %}</p>
+        </div>
+      </article>
+
+      <hr>
+
+
+{% endblock %}
