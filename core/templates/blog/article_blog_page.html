@@ -61,7 +61,7 @@
           </div>
           <div class="card-body p-5">
             <p id="general-terms">
-            <p>{% for block in self.content %}
+            {% for block in self.content %}
               {% include_block block %}
               {% endfor %}</p>
 
