@@ -1,0 +1,21 @@
+<form id="contact-form" method="post" autocomplete="off">
+    <div class="card-body">
+        <div class="row">
+
+            <div class="col-md-12 ps-md-2">
+                {% block card-body %}
+                {% if messages %}
+                {% for message in messages %}
+                <p{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</p>
+                    {% endfor %}
+                    {% endif %}
+
+                    {% if page.body %}
+                    {%  include "form/streamfield.html" %}
+                    {% endif %}
+
+                    {% endblock %}
+            </div>
+        </div>
+    </div>
+</form>

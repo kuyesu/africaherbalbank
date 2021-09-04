@@ -1,7 +1,7 @@
 from wagtail.core import blocks
 from wagtail.core.templatetags.wagtailcore_tags import richtext
 from wagtail.images.blocks import ImageChooserBlock
-
+from wagtailstreamforms.blocks import WagtailFormBlock
 
 class TitleAndTextBlock(blocks.StructBlock):
     """Title and text and nothing else."""
@@ -24,7 +24,7 @@ class CardBlock(blocks.StructBlock):
         blocks.StructBlock(
             [
                 ("image", ImageChooserBlock(required=True)),
-                ("title", blocks.CharBlock(required=True, max_length=40)),
+                ("title", blocks.CharBlock(required=True, max_length=140)),
                 ("text", blocks.TextBlock(required=True, max_length=200)),
                 ("button_page", blocks.PageChooserBlock(required=False)),
                 (
@@ -50,7 +50,7 @@ class Works(blocks.StructBlock):
         blocks.StructBlock(
             [
                 ("image", ImageChooserBlock(required=True)),
-                ("title", blocks.CharBlock(required=True, max_length=25)),
+                ("title", blocks.CharBlock(required=True, max_length=125)),
                 ("text", blocks.TextBlock(required=True, max_length=80)),
                 ("button_page", blocks.PageChooserBlock(required=False)),
                 (
@@ -77,7 +77,7 @@ class UpConingEvents(blocks.StructBlock):
         blocks.StructBlock(
             [
                 ("image", ImageChooserBlock(required=True)),
-                ("title", blocks.CharBlock(required=True, max_length=25)),
+                ("title", blocks.CharBlock(required=True, max_length=125)),
                 ("text", blocks.TextBlock(required=True)),
                 ("button_page", blocks.PageChooserBlock(required=False)),
                 (
@@ -403,7 +403,7 @@ class CardCode(blocks.StructBlock):
     Code_card = blocks.ListBlock(
         blocks.StructBlock(
             [
-                ("title", blocks.CharBlock(required=True, max_length=40)),
+                ("title", blocks.CharBlock(required=True, max_length=140)),
                 ("text", blocks.TextBlock(required=True, max_length=200)),
                 ("image", ImageChooserBlock(required=True)),
                 ("button_page", blocks.PageChooserBlock(required=False)),
@@ -428,7 +428,7 @@ class CardImage(blocks.StructBlock):
     Image_Card = blocks.ListBlock(
         blocks.StructBlock(
             [
-                ("title", blocks.CharBlock(required=True, max_length=40)),
+                ("title", blocks.CharBlock(required=True, max_length=140)),
                 ("text", blocks.TextBlock(required=True, max_length=200)),
                 ("image", ImageChooserBlock(required=True)),
                 ("button_page", blocks.PageChooserBlock(required=False)),
@@ -484,7 +484,7 @@ class CardGeneric(blocks.StructBlock):
     Generic_Card = blocks.ListBlock(
         blocks.StructBlock(
             [
-                ("title", blocks.CharBlock(required=True, max_length=40)),
+                ("title", blocks.CharBlock(required=True, max_length=140)),
                 ("text", blocks.TextBlock(required=True, max_length=200)),
                 ("image", ImageChooserBlock(required=True)),
                 ("button_page", blocks.PageChooserBlock(required=False)),
@@ -509,7 +509,7 @@ class CardActivity(blocks.StructBlock):
     Activities_card = blocks.ListBlock(
         blocks.StructBlock(
             [
-                ("title", blocks.CharBlock(required=True, max_length=40)),
+                ("title", blocks.CharBlock(required=True, max_length=140)),
                 ("text", blocks.TextBlock(required=True, max_length=200)),
                 ("image", ImageChooserBlock(required=True)),
                 ("button_page", blocks.PageChooserBlock(required=False)),
@@ -534,8 +534,8 @@ class CardTestimonies(blocks.StructBlock):
     Testimonies_card = blocks.ListBlock(
         blocks.StructBlock(
             [
-                ("title", blocks.CharBlock(required=True, max_length=40)),
-                ("subtitle", blocks.CharBlock(required=True, max_length=40)),
+                ("title", blocks.CharBlock(required=True, max_length=140)),
+                ("subtitle", blocks.CharBlock(required=True, max_length=240)),
                 
                 ("image", ImageChooserBlock(required=True)),
                 ("Name", blocks.CharBlock(required=True, max_length=40)),
@@ -564,8 +564,8 @@ class CardTable(blocks.StructBlock):
     Table_Card = blocks.ListBlock(
         blocks.StructBlock(
             [
-                ("title", blocks.CharBlock(required=True, max_length=40)),
-                ("subtitle", blocks.CharBlock(required=True, max_length=40)),
+                ("title", blocks.CharBlock(required=True, max_length=140)),
+                ("subtitle", blocks.CharBlock(required=True, max_length=240)),
                 
                 ("image", ImageChooserBlock(required=True)),
                 ("Name", blocks.CharBlock(required=True, max_length=40)),
@@ -593,7 +593,7 @@ class Technologies(blocks.StructBlock):
     Technologies = blocks.ListBlock(
         blocks.StructBlock(
             [
-                ("title", blocks.CharBlock(required=True, max_length=40)),
+                ("title", blocks.CharBlock(required=True, max_length=140)),
                 ("text", blocks.TextBlock(required=False, max_length=200)),
                 ("image", ImageChooserBlock(required=True)),
                 ("button_page", blocks.PageChooserBlock(required=False)),
@@ -618,8 +618,8 @@ class Testimonies(blocks.StructBlock):
     Testimonies_FrOm_user = blocks.ListBlock(
         blocks.StructBlock(
             [
-                ("title", blocks.CharBlock(required=True, max_length=40)),
-                ("subtitle", blocks.CharBlock(required=True, max_length=40)),
+                ("title", blocks.CharBlock(required=True, max_length=240)),
+                ("subtitle", blocks.CharBlock(required=True, max_length=240)),
                 
                 ("image", ImageChooserBlock(required=True)),
                 ("Name", blocks.CharBlock(required=True, max_length=40)),
@@ -647,7 +647,7 @@ class Partners(blocks.StructBlock):
     patners = blocks.ListBlock(
         blocks.StructBlock(
             [
-                ("title", blocks.CharBlock(required=True, max_length=40)),
+                ("title", blocks.CharBlock(required=True, max_length=140)),
                 ("image", ImageChooserBlock(required=True)),
                 ("button_page", blocks.PageChooserBlock(required=False)),
                 (
@@ -663,7 +663,72 @@ class Partners(blocks.StructBlock):
     class Meta: # noqa
         template = "streams/partners.html"
         icon = "phone"
-        label = "Partners"  
+        label = "Partners"
+        
+class ClassicCard(blocks.StructBlock):
+    title = blocks.CharBlock(required=True, help_text="Add your title")
+
+    classic_content = blocks.ListBlock(
+        blocks.StructBlock(
+            [
+                ("title", blocks.CharBlock(required=True, max_length=100)),
+                ("subtitle", blocks.TextBlock(required=True, max_length=200)),
+                ("image", ImageChooserBlock(required=True)),
+                ("button_page", blocks.PageChooserBlock(required=False)),
+                (
+                    "button_url",
+                    blocks.URLBlock(
+                        required=False,
+                        help_text="If the button page above is selected, that will be used first.",  # noqa
+                    ),
+                ),
+            ]
+        )
+    )
+    class Meta: # noqa
+        template = "streams/card/classic_card.html"
+        icon = "card"
+        label = "Classic Card"
+        
+
+class FaqCard(blocks.StructBlock):
+    category = blocks.CharBlock(required=True, help_text="Add your title")
+
+    questions_and_answer = blocks.ListBlock(
+        blocks.StructBlock(
+            [
+                ("question", blocks.CharBlock(required=True, max_length=100)),
+                ("paragraph", blocks.TextBlock(required=True, max_length=1000)),
+                
+            ]
+        )
+    )
+    class Meta: # noqa
+        template = "streams/faq_card.html"
+        icon = "card"
+        label = "FAQ"  
+        
+
+class FormCard(blocks.StructBlock):
+    heading = blocks.CharBlock(required=True, help_text="Add your title")
+
+    body = blocks.ListBlock(
+        blocks.StructBlock(
+            [
+                ('paragraph', blocks.RichTextBlock()),
+                ('form', WagtailFormBlock()),
+            ]
+        )
+    )
+    class Meta: # noqa
+        template = "streams/form/form_card.html"
+        icon = "form"
+        label = "Form"  
+        
+
+
+
+
 # ------------------------------------------------------------------------
 
 

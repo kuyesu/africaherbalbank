@@ -1,0 +1,23 @@
+<div class="card-body p-sm-5 pt-0">
+    <h4 class="mt-5 mb-4 ps-3">{{self.category}}</h4>
+    <div class="accordion" id="accordionFaq2">
+        {% for questions in self.questions_and_answer %}
+      <div class="accordion-item mb-3">
+        <h6 class="accordion-header" id="headingOne1">
+          <button class="accordion-button border-bottom font-weight-bold text-start" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne1" aria-expanded="false" aria-controls="collapseOne1">
+            {{questions.question}}
+            <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3"></i>
+            <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3"></i>
+          </button>
+        </h6>
+        <div id="collapseOne1" class="accordion-collapse collapse" aria-labelledby="headingOne1" data-bs-parent="#accordionFaq2">
+          <div class="accordion-body text-sm opacity-8">
+            {{questions.paragraph}}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+
+    </div>
+</div>

@@ -1,0 +1,24 @@
+  {% load wagtailimages_tags static %}
+  {% for card in self.classic_content %}
+  <header>
+    <div class="page-header min-vh-75">
+      <div class="oblique position-absolute top-0 h-100 d-md-block d-none">
+      {% image card.image fill-500x400 as img%}
+        <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 border-radius-lg border-top-start-radius-0 ms-n6" style="background-image: url('{{img.url}}')"></div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 col-md-7 d-flex justify-content-center text-md-start text-center flex-column">
+            <h2 class="text-gradient text-info mb-0">{{self.title}}</h2>
+            <h2 class="mb-4">{{card.title}}</h2>
+            <p class="lead pe-md-5 me-md-5 mb-4">{{card.subtitle}} </p>
+            <div class="buttons">
+              <button type="button" class="btn bg-gradient-dark mt-4">Get Started</button>
+              <button type="button" class="btn text-dark shadow-none mt-4">Read more</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  {% endfor %}

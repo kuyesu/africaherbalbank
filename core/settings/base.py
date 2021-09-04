@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'header',
     'helpcenter',
     'herballogo',
+    'herbs',
     'home',
     'learning',
     'menu',

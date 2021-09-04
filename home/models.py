@@ -26,6 +26,8 @@ class HomePage(Page):
         'contact.ContactPage',
         'about.AboutPage',
         'header.HeaderBanner',
+        'helpcenter.Help',
+        'helpcenter.Faq',
     ]
     parent_page_type = [
         'wagtailcore.Page'
