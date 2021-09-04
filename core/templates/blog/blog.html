@@ -1,0 +1,560 @@
+{% extends "base.html" %}
+
+{% load wagtailimages_tags wagtailcore_tags %}
+{% load wagtailimages_tags widget_tweaks comments comments_xtd static %}
+
+
+{% block content %}
+<section class="section">
+  <div class="container clearfix">
+    <div class=" col-lg-12 col-md-12 col-sm-12 clearfix">
+      <div class="divider"></div>
+        <nav class="portfolio-filter clearfix">
+          <h2>{% if self.custom_title %}
+                    {{ self.custom_title }}
+                {% else %}
+                    {{ self.title }}
+                {% endif %}</h2>
+        </nav>
+      </div>
+    </div>
+  
+  </div> 
+</section>
+
+
+
+    <section class="section1">
+    <div class="container clearfix">
+      <div class="content col-lg-8 col-md-8 col-sm-8 col-xs-12 clearfix">
+
+        <!-- SLIDE POST -->
+        <article class="blog-wrap">
+          <div class="blog-media">
+            <div id="myCarousel" class="carousel slide">
+              <div class="carousel-inner">
+                <div class="item active">
+                 {% image self.intro_image fill-1400x1400 as intro_img %}
+                    <img src="{{ intro_img.url }}" alt="{{ intro_img.alt }}">
+              </div>
+              
+          </div>
+
+          <header class="page-header blog-title">
+            <h3 class="general-title"> {% if self.custom_title %}
+                    {{ self.custom_title }}
+                {% else %}
+                    {{ self.title }}
+                {% endif %}</h3>
+            <div class="post-meta">
+              <p>
+                Published at: <span class="publish-on">@to do here</span>
+                <span class="sep">/</span> Category:  {% if self.categories.count %}
+                
+                    {% for cat in self.categories.all %}
+                        <a href="?category={{ cat.slug }}">
+                            {{ cat.name }}
+                        </a>{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                   
+            {% endif %}
+                <span class="sep">/</span> Author:  {% for iter in self.blog_authors.all %}
+                    {% if iter.author.website %}
+                        <a href="{{ iter.author.website }}">
+                            {{ iter.author.name }}
+                        </a>
+                    {% else %}
+                        {{ iter.author.name }}
+                    {% endif %}
+                    </div>
+                {% endfor %}</a>
+              </p>
+            </div>
+
+            <div class="post-desc">
+            <p>{% for block in self.content %}
+                    {% include_block block %}
+                {% endfor %}</p>
+            
+        </div>
+          </header>
+        
+        </article>
+
+        <div class="author_box clearfix">
+
+         {% for iter in self.blog_authors.all %}
+                    {% image iter.author.image fill-50x50 as img %}
+                    
+                    <img src="{{ img.url }}" class="img-circle alignleft" width="100"alt="{{ iter.author.name }}">
+                    
+          <h4>Posted by 
+                    {% if iter.author.website %}
+                        <a href="{{ iter.author.website }}">
+                            {{ iter.author.name }}
+                        </a>
+                    {% else %}
+                        {{ iter.author.name }}
+                    {% endif %}
+                    </h4>
+
+                    
+          <p>LLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen
+            book.</p>
+          <div class="social_buttons">
+            <a href="single-with-sidebar.html#" data-toggle="tooltip" data-placement="bottom" title="Facebook"><i class="fa fa-facebook"></i></a>
+            <a href="single-with-sidebar.html#" data-toggle="tooltip" data-placement="bottom" title="Twitter"><i class="fa fa-twitter"></i></a>
+            <a href="single-with-sidebar.html#" data-toggle="tooltip" data-placement="bottom" title="Google+"><i class="fa fa-google-plus"></i></a>
+            <a href="single-with-sidebar.html#" data-toggle="tooltip" data-placement="bottom" title="Dribbble"><i class="fa fa-dribbble"></i></a>
+          </div>
+        </div>
+        {% endfor %}
+        <!-- end author_box -->
+
+
+
+      </div>
+      <!-- end content -->
+
+
+      <!-- SIDEBAR -->
+      <div id="sidebar" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+
+        <div class="widget">
+          <h4 class="title">
+                        <span>Subscribe</span>
+                    </h4>
+          <form id="subscribe" action="mc.php" name="subscribe" method="post">
+            <input type="text" name="name" id="name" class="form-control" placeholder="Name">
+            <input type="text" name="email" id="email" class="form-control" placeholder="Email">
+            <div class="pull-right">
+              <input type="submit" value="Subscribe" id="submit" class="button">
+            </div>
+          </form>
+        </div>
+
+        <div class="widget">
+          <h4 class="title">
+                    	<span>Recent Posts</span>
+                    </h4>
+          <div class="tabbable">
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="left-sidebar.html#recent" data-toggle="tab">Recent</a></li>
+              <li><a href="left-sidebar.html#popular" data-toggle="tab">Popular</a></li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane active" id="recent">
+                <ul class="recent_posts">
+                  <li>
+                    <a href="#">
+                                    <img src="img/recent_post_01.png" alt="" />Our New Dashboard Is Here
+                                    </a>
+                    <a class="readmore" href="#">read more</a>
+                  </li>
+                  <li>
+                    <a href="#">
+                                    <img src="img/recent_post_02.png" alt="" />Design Is In The Air
+                                    </a>
+                    <a class="readmore" href="#">read more</a>
+                  </li>
+                </ul>
+                <!-- recent posts -->
+              </div>
+              <div class="tab-pane" id="popular">
+                <ul class="recent_posts">
+                  <li>
+                    <a href="#">
+                                    <img src="img/flickr_01.jpg" alt="" />Blog Post With Image
+                                    </a>
+                    <a class="readmore" href="#">read more</a>
+                  </li>
+                  <li>
+                    <a href="#">
+                                    <img src="img/flickr_02.jpg" alt="" />Another Recent Post with Image
+                                    </a>
+                    <a class="readmore" href="#">read more</a>
+                  </li>
+                </ul>
+                <!-- recent posts -->
+              </div>
+            </div>
+          </div>
+          <!-- tabbable -->
+        </div>
+        <!-- end widget -->
+
+
+        <div class="widget">
+          <h4 class="title">
+                        <span>Categories</span>
+                    </h4>
+          <ul class="categories">
+            <li>{% for cat in categories %}
+              {{ cat.name }}</a>
+            {% endfor %}</a></li>
+            
+          </ul>
+        </div>
+
+        <div class="widget">
+          <h4 class="title">
+                        <span>Pages</span>
+                    </h4>
+          <ul class="pages">
+          
+                  <li>
+                    {% for item in navigation.menu_items.all %}
+                      <a href="{{ item.link }}">{{ item.title }}</a>
+                    {% endfor %}
+                  </li>
+                
+          </ul>
+        </div>
+
+        <div class="widget">
+          <h4 class="title">
+                        <span>Tags</span>
+                    </h4>
+
+          <div class="tagcloud">
+           {% if page.tags.count %}
+        
+                {% for tag in page.tags.all %}
+            {# Loop through all the existing tags #}
+                    <a href="/blog/?tag={{ tag.slug }}">{{ tag }}</a>
+                {% endfor %}
+            {% endif %}</a>
+            
+          </div>
+        </div>
+
+      </div>
+      <!-- end sidebar -->
+    </div>
+    <!-- end container -->
+  </section>
+  <!-- end section -->
+
+{% comment %} <form method="post" id="comment-new">
+    {% csrf_token %}
+    {{ form.as_p }}     
+    <button type="submit">Send</button>
+</form> {% endcomment %}
+
+
+
+<div class="container">
+    <div class="row">
+      <div class="col-lg-7">
+        <!-- START Blogs w/ 3 rows w/ image on left & title, text, author on end-->
+        <section class="py-5">
+          <div class="card card-plain card-blog mt-5">
+            <div class="row">
+              <div class="col-lg-4 col-md-4">
+                <div class="card-image position-relative border-radius-lg">
+                  <div class="blur-shadow-image">
+                    <img class="img border-radius-lg" src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/soft-ui-design-system/assets/img/color-architecture.jpg" alt="architecture">
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-7 col-md-7 my-sm-auto mt-3 ms-sm-3">
+                <h4>
+                  <a href="javascript:;" class="text-dark">Rover raised to $65 million</a>
+                </h4>
+                <p>
+                {% for block in self.content %}
+                    {% include_block block %}
+                {% endfor %}
+                </p>
+                <div class="author">
+                  <img src="../../assets/img/team-4.jpg" alt="team-4" class="avatar avatar-sm shadow me-2">
+                  <p class="my-auto">Katie Roof</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card card-plain card-blog mt-5">
+            <div class="row">
+              <div class="col-lg-4 col-md-4">
+                <div class="card-image position-relative border-radius-lg">
+                  <div class="blur-shadow-image">
+                    <img class="img border-radius-lg" src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/soft-ui-design-system/assets/img/color-estate.jpg" alt="estate">
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-7 col-md-7 my-sm-auto mt-3 ms-sm-3">
+                <h4>
+                  <a href="javascript:;" class="text-dark">MateLabs mixes machine learning</a>
+                </h4>
+                <p>
+                  If you’ve ever wanted to train a machine learning model and integrate it with IFTTT, a new offering from MateLabs. MateVerse, a platform where novices can spin out machine... <a href="javascript:;"> Read More </a>
+                </p>
+                <div class="author">
+                  <img src="../../assets/img/team-3.jpg" alt="team-3" class="avatar avatar-sm shadow me-2">
+                  <p class="my-auto">John Mannes</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card card-plain card-blog my-5">
+            <div class="row">
+              <div class="col-lg-4 col-md-4">
+                <div class="card-image position-relative border-radius-lg">
+                  <div class="blur-shadow-image">
+                    <img class="img border-radius-lg" src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/soft-ui-design-system/assets/img/color-buildings.jpg" alt="buildings">
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-7 col-md-7 my-sm-auto mt-3 ms-sm-3">
+                <h4>
+                  <a href="javascript:;" class="text-dark">US venture investment tricks</a>
+                </h4>
+                <p>
+                  Venture investment in U.S. startups rose sequentially in the second quarter of 2017, boosted by large, late-stage financings and a few outsized early-stage rounds in tech and healthcare.. <a href="javascript:;"> Read More </a>
+                </p>
+                <div class="author">
+                  <img src="../../assets/img/team-2.jpg" alt="team-2" class="avatar avatar-sm shadow me-2">
+                  <p class="my-auto">Devin Coldewey</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- END Blogs w/ 3 rows w/ image on left & title, text, author on end-->
+        <div class="card card-blog card-background">
+          <div class="full-background" style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/soft-ui-design-system/assets/img/desert.jpg')"></div>
+          <div class="card-body body-left">
+            <div class="content-left text-start">
+              <h2 class="card-title text-white">Flexible office space means growing your team.</h2>
+              <p class="card-description">Rather than worrying about switching offices every couple years, you can instead stay in the same location and grow-up from your shared coworking space to an office that takes up an entire floor.</p>
+              <div class="author">
+                <img src="../../assets/img/team-2.jpg" alt="..." class="avatar mr-2">
+                <div class="name ms-2">
+                  <span>Mathew Glock</span>
+                  <div class="stats">
+                    <small>Marketing Manager</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- START Blogs w/ 3 rows w/ image on left & title, text, author on end-->
+        <section class="py-5">
+          <div class="card card-plain card-blog mt-5">
+            <div class="row">
+              <div class="col-lg-4 col-md-4">
+                <div class="card-image position-relative border-radius-lg">
+                  <div class="blur-shadow-image">
+                    <img class="img border-radius-lg" src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/soft-ui-design-system/assets/img/color-architecture.jpg" alt="architecture">
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-7 col-md-7 my-sm-auto mt-3 ms-sm-3">
+                <h4>
+                  <a href="javascript:;" class="text-dark">Rover raised to $65 million</a>
+                </h4>
+                <p>
+                  Finding temporary housing for your dog should be as easy as renting an Airbnb. That’s the idea behind Rover, which raised $65 million to expand its pet sitting <a href="javascript:;"> Read More </a>
+                </p>
+                <div class="author">
+                  <img src="../../assets/img/team-4.jpg" alt="team-4" class="avatar avatar-sm shadow me-2">
+                  <p class="my-auto">Katie Roof</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card card-plain card-blog mt-5">
+            <div class="row">
+              <div class="col-lg-4 col-md-4">
+                <div class="card-image position-relative border-radius-lg">
+                  <div class="blur-shadow-image">
+                    <img class="img border-radius-lg" src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/soft-ui-design-system/assets/img/color-estate.jpg" alt="estate">
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-7 col-md-7 my-sm-auto mt-3 ms-sm-3">
+                <h4>
+                  <a href="javascript:;" class="text-dark">MateLabs mixes machine learning</a>
+                </h4>
+                <p>
+                  If you’ve ever wanted to train a machine learning model and integrate it with IFTTT, a new offering from MateLabs. MateVerse, a platform where novices can spin out machine... <a href="javascript:;"> Read More </a>
+                </p>
+                <div class="author">
+                  <img src="../../assets/img/team-3.jpg" alt="team-3" class="avatar avatar-sm shadow me-2">
+                  <p class="my-auto">John Mannes</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card card-plain card-blog my-5">
+            <div class="row">
+              <div class="col-lg-4 col-md-4">
+                <div class="card-image position-relative border-radius-lg">
+                  <div class="blur-shadow-image">
+                    <img class="img border-radius-lg" src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/soft-ui-design-system/assets/img/color-buildings.jpg" alt="buildings">
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-7 col-md-7 my-sm-auto mt-3 ms-sm-3">
+                <h4>
+                  <a href="javascript:;" class="text-dark">US venture investment tricks</a>
+                </h4>
+                <p>
+                  Venture investment in U.S. startups rose sequentially in the second quarter of 2017, boosted by large, late-stage financings and a few outsized early-stage rounds in tech and healthcare.. <a href="javascript:;"> Read More </a>
+                </p>
+                <div class="author">
+                  <img src="../../assets/img/team-2.jpg" alt="team-2" class="avatar avatar-sm shadow me-2">
+                  <p class="my-auto">Devin Coldewey</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- END Blogs w/ 3 rows w/ image on left & title, text, author on end-->
+        <ul class="pagination pagination-primary mt-4 ml-2">
+          <li class="page-item">
+            <a class="page-link" href="javascript:;" aria-label="Previous">
+              <span aria-hidden="true"><i class="fa fa-angle-double-left" aria-hidden="true"></i></span>
+            </a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="javascript:;">1</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="javascript:;">2</a>
+          </li>
+          <li class="page-item active">
+            <a class="page-link" href="javascript:;">3</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="javascript:;">4</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="javascript:;">5</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="javascript:;" aria-label="Next">
+              <span aria-hidden="true"><i class="fa fa-angle-double-right" aria-hidden="true"></i></span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-lg-4 ml-auto">
+        <div class="pt-1 pb-5 position-sticky top-1 mt-lg-8 mt-5">
+          <h4>Newsletter</h4>
+          <p>Get access to subscriber exclusive deals and be the first who gets informed about fresh sales.</p>
+          <div class="my-3">
+            <input type="text" class="form-control mb-sm-0 mb-2" placeholder="Email Here...">
+          </div>
+          <button type="button" class="btn bg-gradient-primary">Subscribe</button>
+          <h4 class="mt-5">Activity</h4>
+          <a href="javascript::">
+            <div class="card justify-content-center mb-3">
+              <div class="card-body p-3">
+                <h6 class="mb-0">Top 50 Tips for Creative Tim</h6>
+                <p class="mb-0 text-body">Mar 08, 2020</p>
+              </div>
+              <div class="position-absolute end-0 me-3 ">
+                <i class="fas fa-angle-right"></i>
+              </div>
+            </div>
+          </a>
+          <a href="javascript::">
+            <div class="card justify-content-center mb-3">
+              <div class="card-body p-3">
+                <h6 class="mb-0">Best ways to avoid the Burnout</h6>
+                <p class="mb-0 text-body">Aug 11, 2020</p>
+              </div>
+              <div class="position-absolute end-0 me-3 ">
+                <i class="fas fa-angle-right"></i>
+              </div>
+            </div>
+          </a>
+          <a href="javascript::">
+            <div class="card justify-content-center mb-3">
+              <div class="card-body p-3">
+                <h6 class="mb-0">Fascinating tactics to help your Business</h6>
+                <p class="mb-0 text-body">Jan 07, 2021</p>
+              </div>
+              <div class="position-absolute end-0 me-3 ">
+                <i class="fas fa-angle-right"></i>
+              </div>
+            </div>
+          </a>
+          <h4 class="mt-5">Top Stories</h4>
+          <div class="card card-plain card-blog mt-4">
+            <div class="row">
+              <div class="col-lg-4 col-md-4">
+                <div class="card-image position-relative border-radius-lg">
+                  <div class="blur-shadow-image">
+                    <img class="img border-radius-lg" src="../../assets/img/curved-images/curved11.jpg" alt="curved11">
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-8 col-md-8 my-sm-auto mt-3">
+                <h5>
+                  <a href="javascript:;" class="text-dark font-weight-normal">MateLabs mixes machine learning</a>
+                </h5>
+              </div>
+            </div>
+          </div>
+          <div class="card card-plain card-blog mt-4">
+            <div class="row">
+              <div class="col-lg-4 col-md-4">
+                <div class="card-image position-relative border-radius-lg">
+                  <div class="blur-shadow-image">
+                    <img class="img border-radius-lg" src="../../assets/img/curved-images/curved9.jpg" alt="curved9">
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-8 col-md-8 my-sm-auto mt-3">
+                <h5>
+                  <a href="javascript:;" class="text-dark font-weight-normal">Mixes machine learning</a>
+                </h5>
+              </div>
+            </div>
+          </div>
+          <div class="card card-plain card-blog mt-4">
+            <div class="row">
+              <div class="col-lg-4 col-md-4">
+                <div class="card-image position-relative border-radius-lg">
+                  <div class="blur-shadow-image">
+                    <img class="img border-radius-lg" src="../../assets/img/curved-images/curved8.jpg" alt="curved8">
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-8 col-md-8 my-sm-auto mt-3">
+                <h5>
+                  <a href="javascript:;" class="text-dark font-weight-normal">MateLabs mixes machine learning</a>
+                </h5>
+              </div>
+            </div>
+          </div>
+          <h4 class="mt-5 mb-4">Tags</h4>
+          <span class="badge bg-light text-dark">Support</span>
+          <span class="badge bg-light text-dark">Business</span>
+          <span class="badge bg-light text-dark">Analytics</span>
+          <span class="badge bg-light text-dark">Tutorials</span>
+          <span class="badge bg-light text-dark mt-2">Sponsorships</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<div class="container-fluid mt-4 comment-form">
+    {% render_comment_form for page %}
+</div>
+
+{% get_comment_count for page as comment_count %}
+{% if comment_count %}
+    <hr>
+    <div class="container-fluid mt-4 media-list">
+        {% render_xtdcomment_tree for page allow_feedback show_feedback %}
+    </div>
+
+    
+{% endif %}
+
+{% endblock %}

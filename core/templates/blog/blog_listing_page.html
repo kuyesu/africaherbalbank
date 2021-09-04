@@ -3,152 +3,116 @@
 {% load static wagtailimages_tags wagtailcore_tags wagtailroutablepage_tags cache %}
 
 {% block content %}
-<section class="post-wrapper-top">
-  <div class="container">
-    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-      <h2>{{ page.title }}</h2>
-      <div style="margin: 0 10 10 20; text-align: center">
-        <a href="{% routablepageurl page "latest_posts" %} " style="margin: 0 10 10 20; text-align: center">VIEW LATEST POSTS ONLY</a>
+
+  <header>
+    <div class="page-header min-vh-50" style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/soft-ui-design-system/assets/img/minimal-interior.jpg')">
+      <span class="mask bg-gradient-primary"></span>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto text-white text-center">
+            <h2 class="text-white">Search over our Blog Posts</h2>
+            <p class="lead">A place for entrepreneurs to share and discover new Stories</p>
+          </div>
+        </div>
       </div>
     </div>
-
-
-    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-      <!-- search -->
-      <div class="search-bar">
-        <form action="" method="get">
-          <fieldset>
-            <input type="image" src="{% static 'img/pixel.gif' %}" class="searchsubmit" alt="" />
-            <input type="text" class="search_text showtextback" name="s" id="s" value="Search..." />
-          </fieldset>
-        </form>
+    <div class="position-relative overflow-hidden" style="height:36px;margin-top:-35px;">
+      <div class="w-full absolute bottom-0 start-0 end-0" style="transform: scale(2);transform-origin: top center;color: #fff;">
+        <svg viewBox="0 0 2880 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 48H1437.5H2880V0H2160C1442.5 52 720 0 720 0H0V48Z" fill="currentColor"></path>
+        </svg>
       </div>
-      <!-- / end div .search-bar -->
+    </div>
+    <div class="container">
+      <div class="row bg-white shadow-lg mt-n6 border-radius-md pb-4 p-3 position-relative w-75 mx-auto">
+        <div class="col-lg-8 mt-lg-n2 mt-2">
+          <label>Search</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-search"></i></span>
+            <input class="form-control" placeholder="Search for category" type="text">
+          </div>
+        </div>
+        <div class="col-lg-4 d-flex align-items-center mt-lg-auto mt-2">
+          <button type="button" class="btn bg-gradient-primary w-100 mb-0">Search</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+<section class="py-2">
+    <div class="container">
+      <div class="row">
+        <div class="col-9 text-center mx-auto">
+{% comment %}   
+     <h3 class="mb-5">POST BY CATEGORY</h3> {% endcomment %}
+          {% for cat in categories %}
+          <span class="badge bg-light text-dark mt-2"><h6><a href=" {% routablepageurl page "category_view" cat.slug %}" class="badge bg-light text-dark mt-2">{{ cat.name }}</a>{% if not forloop.last %} {% endif %}</h6></span>
+          {% endfor %}
     </div>
   </div>
+</div>
 </section>
+   
 
 
-<section class="section">
-  <div class="container clearfix">
-    <div class=" col-lg-12 col-md-12 col-sm-12 clearfix">
-      <div class="divider"></div>
-        <nav class="portfolio-filter clearfix">
-          <h2>BLOG POSTS CATEGORIES</h2>
-          <li>
-            {% for cat in categories %}
-            <a href="{% routablepageurl page "category_view" cat.slug %}" class="dmbutton2" data-filter="*">
+         
+   
+
+ <section class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-9 text-center mx-auto">
+          <h3 class="mb-5">{{self.custom_title}}</h3>
+          <a href="{% routablepageurl page "latest_posts" %} " style="margin: 0 10 10 20; text-align: center"><h6>Check out for latest post</h6></a>
+        </div>
+       
+     
+
+  {% for post in posts %}
+        <div class="col-lg-4 mb-lg-0 mb-4">
+          <div class="card">
+            <div class="card-header p-0 mx-3 mt-3 position-relative z-index-1">
+              {% image post.banner_image fill-250x250 as blog_img %}
+                        <a href="{{ post.url }}" class="d-block blur-shadow-image">
+                            <img class="img-fluid border-radius-md" src="{{ blog_img.url }}" alt="{{ blog_img.alt }}" style='width: 100%;'>
+                        </a>
+            </div>
+            <div class="card-body">
+              <span class="text-gradient text-info text-uppercase text-xs font-weight-bold">{{post.category}}
+              {% for cat in categories %}
+                <a href="{% routablepageurl page "category_view" cat.slug %}" class="dmbutton2" data-filter="*">
               {{ cat.name }}</a>
             {% if not forloop.last %}, {% endif %}
-            {% endfor %}
-          </li>
-        </nav>
+            {% endfor %}</span>
+               <a href="{{post.url}}" class="card-title mt-3 h5 d-block text-darker">
+                {{ post.custom_title }}
+              </a>
+               {% if post.specific.subtitle %}
+              <p class="card-description mb-4">
+                {{ post.specific.subtitle }}
+              </p>
+               {% endif %}
+               {% for iter in post.blog_authors.all %}
+              <div class="author align-items-center">
+               {% image iter.author.image fill-50x50 as img %}
+                <img src="{{ img.url }}" alt="{{ iter.author.name }}" class="avatar shadow">
+                
+                <div class="name ps-2">
+                  <span>{{ iter.author.name }}</span>
+                  <div class="stats">
+                    <small>{{post.first_published_at}}</small>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        {% endfor %}
       </div>
     </div>
-   
-  </div> 
-</section>
 
-
-<section class="section1">
-  <div class="container clearfix">
-    
-      
-   
-        <div class=" col-lg-12 col-md-12 col-sm-12 clearfix">
-          
-          
-          
-          <div class="portfolio-centered">
-            
-            <div class="recentitems portfolio">
-              {% for post in posts %}
-              <div class="portfolio-item col-lg-4 col-md-4 col-sm-4 col-xs-12 web-design">
-                <div class="he-wrap tpl6 market-item">
-                  {% image post.banner_image fill-250x250 as blog_img %}
-                        <a href="{{ post.url }}">
-                            <img src="{{ blog_img.url }}" alt="{{ blog_img.alt }}" style='width: 100%;'>
-                        </a>
-                  <div class="he-view">
-                    <div class="bg a0" data-animate="fadeIn">
-                      <h3 class="big a1" data-animate="fadeInDown"><a href="{{ post.url }}">
-                        <h2 style="color: #fff;">{{ post.custom_title }}</h2>
-                        {% if post.specific.subtitle %}
-                            <p>{{ post.specific.subtitle }}</p>
-                        {% endif %}
-
-                        {# @todo add a summary field to BlogDetailPage; make it a RichTextField with only Bold and Italic enabled. #}
-                        <a href="{{ post.url }}" class="btn btn-primary mt-4">Read More</a>
-                    </a></h3>
-                      <a data-rel="prettyPhoto" href="{{ blog_img.url }}" class="dmbutton a2" data-animate="bounceInLeft"><i class="fa fa-search"></i></a>
-                      <a href="{{ post.url }}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-link"></i></a>
-                      <div class="portfolio_category text-center a2" data-animate="fadeIn">
-                      </div>
-                      <!-- portfolio_category -->
-                    </div>
-                    <!-- he bg -->
-                  </div>
-                  <!-- he view -->
-                </div>
-                <!-- he wrap -->
-                <h3 class="title">{{ post.custom_title }} | </h3> 
-                <p>{% if post.specific.subtitle %}
-                            <p>{{ post.specific.subtitle }}</p>
-                        {% endif %}</p>
-                <p> <a href="{{ post.url }}" class="btn btn-primary mt-4" style="mtext-align: center">Read More</a></p>
-                <p></p>
-              </div>
-              
-              {% endfor %}
-              <!-- end col-12 -->
-            </div>
-            <!-- portfolio -->
-           
-          </div>
-          <!-- portfolio container -->
-    
-         
-          <div class="divider"></div>
-         {# Only show pagination if there is more than one page to click through #}
-    {% if posts.paginator.num_pages > 1 %}
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="pagination">
-                        {% if posts.has_previous %}
-                            <li class="page-item">
-                                <a href="?page={{ posts.previous_page_number }}" class="page-link">
-                                    <span>&laquo;</span>
-                                </a>
-                            </li>
-                        {% endif %}
-
-                        {% for page_num in posts.paginator.page_range %}
-                            <li class="page-item {% if page_num == posts.number %} active{% endif %}">
-                                <a href="?page={{ page_num }}" class="page-link">
-                                    {{ page_num }}
-                                </a>
-                            </li>
-                        {% endfor %}
-
-                        {% if posts.has_next %}
-                            <li class="page-item">
-                                <a href="?page={{ posts.next_page_number }}" class="page-link">
-                                    <span>&raquo;</span>
-                                </a>
-                            </li>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-        </div>
-    {% endif %}
-      
-    </div>
-    <!-- end container -->
-</section>
-<!-- end section -->
-
-
-
-{% endblock content %}
+  </section>
+  
+  {% endblock %}

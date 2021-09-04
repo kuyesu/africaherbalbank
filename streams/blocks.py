@@ -78,7 +78,7 @@ class UpConingEvents(blocks.StructBlock):
             [
                 ("image", ImageChooserBlock(required=True)),
                 ("title", blocks.CharBlock(required=True, max_length=25)),
-                ("text", blocks.TextBlock(required=True, max_length=80)),
+                ("text", blocks.TextBlock(required=True)),
                 ("button_page", blocks.PageChooserBlock(required=False)),
                 (
                     "button_url",
@@ -321,6 +321,7 @@ class CardLightSmall(blocks.StructBlock):
 
 class CardWave(blocks.StructBlock):
     title = blocks.CharBlock(required=True, help_text="Add your title")
+    subtitle = blocks.TextBlock(required=True, help_text="Add your title")
 
     Wave_card = blocks.ListBlock(
         blocks.StructBlock(
@@ -343,6 +344,7 @@ class CardWave(blocks.StructBlock):
         template = "streams/card/card_wave.html"
         icon = "edit"
         label = "Wave Card"
+        max_count=4
 
 
 class CardContact(blocks.StructBlock):
@@ -477,6 +479,7 @@ class CardTeam(blocks.StructBlock):
 
 class CardGeneric(blocks.StructBlock):
     title = blocks.CharBlock(required=True, help_text="Add your title")
+    subtitle = blocks.CharBlock(required=True, help_text="Add your title")
 
     Generic_Card = blocks.ListBlock(
         blocks.StructBlock(
