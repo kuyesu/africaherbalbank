@@ -30,6 +30,7 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 INSTALLED_APPS = [
     'django_comments_xtd',
     'django_comments',
+    "wagtail.contrib.table_block",
     
     'about',
     'blog',
@@ -38,7 +39,7 @@ INSTALLED_APPS = [
     'header',
     'helpcenter',
     'herballogo',
-    'herbs',
+    # 'herbs',
     'home',
     'learning',
     'menu',
@@ -57,7 +58,7 @@ INSTALLED_APPS = [
 
     
     'django_countries',
-    
+    'wagtailtrans',
     
 
     'wagtail.contrib.forms',

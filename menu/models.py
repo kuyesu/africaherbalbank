@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 from django_extensions.db.fields import AutoSlugField
-from modelcluster.fields import ParentalManyToManyField, ParentalKey
+
 from modelcluster.models import ClusterableModel
 from wagtail.core import blocks
 from wagtail.core.models import Orderable, Page
@@ -12,7 +12,22 @@ from wagtail.core.fields import RichTextField, StreamField
 from wagtail.snippets.edit_handlers import SnippetChooserPanel
 from wagtail.snippets.models import register_snippet
 
+from django.conf import settings
+from django.db import models
 
+
+from django_extensions.db.fields import AutoSlugField
+from modelcluster.fields import  ParentalKey
+from modelcluster.models import ClusterableModel
+from wagtail.core import blocks
+from wagtail.core.models import Orderable
+from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel, MultiFieldPanel, PageChooserPanel, InlinePanel
+from wagtail.core.fields import RichTextField, StreamField
+from wagtail.snippets.edit_handlers import SnippetChooserPanel
+from wagtail.snippets.models import register_snippet
+
+from wagtailtrans.models import Language
 
 
 # Create your models here.
@@ -70,7 +85,6 @@ class MenuItem(Orderable):
         ImageChooserPanel('icon'),
         FieldPanel('show_when'),
     ]
-
     # def trans_page(self, language_code):
     #     if self.link_page:
     #         can_page = self.link_page.canonical_page if self.link_page.canonical_page else self.link_page
@@ -83,12 +97,27 @@ class MenuItem(Orderable):
     #         return TranslatablePage.objects.get(language=language, canonical_page=can_page)
     #     return None
 
-    # def trans_url(self, language_code):
-    #     if self.link_url:
-    #         return '/' + language_code + self.link_url
-    #     elif self.link_page:
-    #         return self.trans_page(language_code).url
-    #     return None
+    def trans_url(self, language_code):
+        if self.link_url:
+            return '/' + language_code + self.link_url
+        # elif self.link_page:
+        #     return self.trans_page(language_code).url
+        return None
+
+    @property
+    def slug_of_submenu(self):
+        # becomes slug of submenu if there is one, otherwise None
+        if self.title_of_submenu:
+            return slugify(self.title_of_submenu)
+        return None
+
+    def show(self, authenticated):
+        return ((self.show_when == 'always')
+                or (self.show_when == 'logged_in' and authenticated)
+                or (self.show_when == 'not_logged_in' and not authenticated))
+
+    def __str__(self):
+        return self.title
 
     @property
     def slug_of_submenu(self):

@@ -1,0 +1,38 @@
+{% for item in self.banner_content %}{% endfor %}
+{% image item.banner_image width-1320 as img%}
+<header>
+    <div class="page-header min-vh-50" style="background-image: url('{{img.url}}')">
+      <span class="mask bg-gradient-dark"></span>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto text-white text-center">
+            <h2 class="text-white">{{item.banner_title}}</h2>
+            <p class="lead">{{item.banner_subtitle}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="position-relative overflow-hidden" style="height:36px;margin-top:-35px;">
+      <div class="w-full absolute bottom-0 start-0 end-0" style="transform: scale(2);transform-origin: top center;color: #f8f9fa;">
+        <svg viewBox="0 0 2880 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 48H1437.5H2880V0H2160C1442.5 52 720 0 720 0H0V48Z" fill="currentColor"></path>
+        </svg>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row bg-white shadow mt-n6 border-radius-md py-4 p-3 position-relative">
+        <div class="col-md-10 mb-md-0 mb-2">
+          <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-search"></i></span>
+            <input type="text" class="form-control" placeholder="Search for your answer">
+          </div>
+        </div>
+        <div class="col-md-2 ps-md-0">
+          <button type="button" class="btn bg-gradient-primary w-100 mb-0 h-100 position-relative z-index-2">Search</button>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <p class="ps-md-0"><span class="text-uppercase">Recent Searches:</span><i>"How to downloand my theme", "Request an invoice"..</i></p>
+      </div>
+    </div>
+  </header>

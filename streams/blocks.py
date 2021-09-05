@@ -320,8 +320,6 @@ class CardLightSmall(blocks.StructBlock):
 
 
 class CardWave(blocks.StructBlock):
-    title = blocks.CharBlock(required=True, help_text="Add your title")
-    subtitle = blocks.TextBlock(required=True, help_text="Add your title")
 
     Wave_card = blocks.ListBlock(
         blocks.StructBlock(
@@ -729,6 +727,108 @@ class FormCard(blocks.StructBlock):
 
 
 
+
+
+# -------------------------------------------------------------------------------------
+class BannerTransparent(blocks.StructBlock):
+
+    banner_content = blocks.ListBlock(
+        blocks.StructBlock(
+            [
+                ("banner_title", blocks.CharBlock(required=True, max_length=100)),
+                ("banner_subtitle", blocks.TextBlock(required=True, max_length=200)),
+                ("banner_image", ImageChooserBlock(required=True)),
+                ("button_page", blocks.PageChooserBlock(required=False)),
+                (
+                    "button_url",
+                    blocks.URLBlock(
+                        required=False,
+                        help_text="If the button page above is selected, that will be used first.",  # noqa
+                    ),
+                ),
+            ]
+        )
+    )
+    class Meta: # noqa
+        template = "streams/banner/banner_transparent.html"
+        icon = "card"
+        label = "Transparent Banner"
+        
+        
+
+class Banner(blocks.StructBlock):
+
+    banner_content = blocks.ListBlock(
+        blocks.StructBlock(
+            [
+                ("banner_title", blocks.CharBlock(required=True, max_length=100)),
+                ("banner_subtitle", blocks.TextBlock(required=True, max_length=200)),
+                ("banner_image", ImageChooserBlock(required=True)),
+                ("button_page", blocks.PageChooserBlock(required=False)),
+                (
+                    "button_url",
+                    blocks.URLBlock(
+                        required=False,
+                        help_text="If the button page above is selected, that will be used first.",  # noqa
+                    ),
+                ),
+            ]
+        )
+    )
+    class Meta: # noqa
+        template = "streams/banner/banner.html"
+        icon = "card"
+        label = "curve Banner"
+        
+
+class BannerOpacity(blocks.StructBlock):
+
+    banner_content = blocks.ListBlock(
+        blocks.StructBlock(
+            [
+                ("banner_title", blocks.CharBlock(required=True, max_length=100)),
+                ("banner_subtitle", blocks.TextBlock(required=True, max_length=200)),
+                ("banner_image", ImageChooserBlock(required=True)),
+                ("button_page", blocks.PageChooserBlock(required=False)),
+                (
+                    "button_url",
+                    blocks.URLBlock(
+                        required=False,
+                        help_text="If the button page above is selected, that will be used first.",  # noqa
+                    ),
+                ),
+            ]
+        )
+    )
+    class Meta: # noqa
+        template = "streams/banner/opacity.html"
+        icon = "card"
+        label = "Opacity Banner"
+
+
+class BannerCurveOpacity(blocks.StructBlock):
+
+    banner_content = blocks.ListBlock(
+        blocks.StructBlock(
+            [
+                ("banner_title", blocks.CharBlock(required=True, max_length=100)),
+                ("banner_subtitle", blocks.TextBlock(required=True, max_length=200)),
+                ("banner_image", ImageChooserBlock(required=True)),
+                ("button_page", blocks.PageChooserBlock(required=False)),
+                (
+                    "button_url",
+                    blocks.URLBlock(
+                        required=False,
+                        help_text="If the button page above is selected, that will be used first.",  # noqa
+                    ),
+                ),
+            ]
+        )
+    )
+    class Meta: # noqa
+        template = "streams/banner/curve_opacity.html"
+        icon = "card"
+        label = "Opacity Curve Banner"
 # ------------------------------------------------------------------------
 
 

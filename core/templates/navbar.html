@@ -1,98 +1,94 @@
-<!-- Navbar Dark -->
-<nav
-  class="navbar navbar-expand-lg navbar-dark  z-index-3 py-0" style="background-color:#012402;">
-  <div class="container">
-    <a class="navbar-brand text-white" href="/" rel="tooltip" title="Designed and Coded by Creative Tim" data-placement="bottom" target="_blank">
-      
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+{% load wagtailimages_tags menu_tags %}
+
+{% get_menu "main" None request.user.is_authenticated as navigation %}
+{% load static %}
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-green bg-green" style="background-color: rgb(4, 46, 23);">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#" style="color: rgb(207, 217, 226); font-weight: 700; font-size: medium;">We are making and easing a research in herbal medicines</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navigation">
-      <ul class="navbar-nav navbar-nav-hover mx-auto">
-        <li class="nav-item px-3">
-          <a class="nav-link text-white opacity-8">
-            Pages
-          </a>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#" style="color: rgb(207, 217, 226); font-weight: 700; font-size: medium;">Call: +(256) 750 955100 </a>
         </li>
-
-        <li class="nav-item px-3">
-          <a class="nav-link text-white opacity-8">
-            Utilities
-          </a>
+        <li class="nav-item">
+          <a class="nav-link" href="#" style="color: rgb(207, 217, 226); font-weight: 700; font-size: medium;">Reach Us by Email: helpdesk@africaherbalbank.com</a>
         </li>
-
-       <li class="nav-item px-3">
-          <a class="nav-link text-white opacity-8">
-            Blocks
-         
+        <li class="nav-item">
+          <a class="nav-link" href="#"style="color: rgb(207, 217, 226); font-weight: 700; font-size: medium;">Social Links: <i class="fa fa-facebook-official" aria-hidden="true"></i><i class="fa fa-twitter" aria-hidden="true"></i><i class="fa fa-whatsapp" aria-hidden="true"></i></a>
         </li>
-        </a>
-
-        <li class="nav-item px-3">
-          <a class="nav-link text-white opacity-8">
-            Docs
-          </a>
-        </li>
-      </ul>
-
-      <ul class="navbar-nav ms-auto">
-      <i class="fas fa-heart"></i>
-       <a href="#" data-toggle="tooltip" data-placement="bottom" title="Facebook"><i class="fa fa-facebook"></i></a>
-          <a href="#" data-toggle="tooltip" data-placement="bottom" title="Twitter"><i class="fa fa-twitter"></i></a>
-          <a href="#" data-toggle="tooltip" data-placement="bottom" title="Google+"><i class="fa fa-google-plus"></i></a>
-          <a href="#" data-toggle="tooltip" data-placement="bottom" title="Dribbble"><i class="fa fa-dribbble"></i></a>
-          <a href="#" data-toggle="tooltip" data-placement="bottom" title="RSS"><i class="fa fa-rss"></i></a>
       </ul>
     </div>
   </div>
 </nav>
-<!-- End Navbar -->
 
 
-<!-- Navbar Light -->
-<nav
-  class="navbar navbar-expand-lg navbar-light bg-white z-index-3 py-3">
-  <div class="container">
-    <a class="navbar-brand" href="" rel="tooltip" title="Designed and Coded by Creative Tim" data-placement="bottom" target="_blank">
-      AFRICA HERBAL bank
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navigation">
-      <ul class="navbar-nav navbar-nav-hover mx-auto">
-        <li class="nav-item px-3">
-          <a class="nav-link">
-            Pages
+
+<div class="container position-sticky z-index-sticky top-0" style="max-width: 100%;">
+  <div class="row">
+    <div class="col-12">
+      <nav class="navbar navbar-expand-lg  blur ">
+        <div class="container-fluid ">
+
+
+          <a class="navbar-brand font-weight-bolder ms-sm-3" href="/" rel="tooltip" title="" data-placement="bottom"
+            target="_blank">
+            <img src="{% static "img/custom-logo.png"%}" alt="" width="70" height="70">
+
+            AFRICA HERBAL BANK
           </a>
-        </li>
-
-        <li class="nav-item px-3">
-          <a class="nav-link">
-            Utilities
-          </a>
-        </li>
-
-        <li class="nav-item px-3">
-          <a class="nav-link">
-            Blocks
-          </a>
-        </li>
-
-        <li class="nav-item px-3">
-          <a class="nav-link ">
-            Docs
-          </a>
-        </li>
-      </ul>
-
-      <ul class="navbar-nav ms-auto">
-        <button class="btn bg-gradient-primary mb-0">Donate Now</button>
-      </ul>
+          <a href="https://www.creative-tim.com/product/soft-ui-design-system-pro#pricingCard"
+            class="btn btn-sm  bg-gradient-primary  btn-round mb-0 ms-auto d-lg-none d-block">DONATE</a>
+          <button class="navbar-toggler shadow-none ms-md-2" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon mt-2">
+              <span class="navbar-toggler-bar bar1"></span>
+              <span class="navbar-toggler-bar bar2"></span>
+              <span class="navbar-toggler-bar bar3"></span>
+            </span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class=" navbar-nav ml-auto mr-5">
+              {% for item in navigation %}
+              {% get_menu item.slug item.page request.user.is_authenticated as submenu %}
+              <li class="nav-item {% if submenu %} dropdown {% endif %}p-2">
+                <div class="dropdown show">
+                  <a href="{{ item.url }}" {% if submenu %}
+                    class="menuitem dropdown-toggle {% if item.icon %}menuicon{% endif %}" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false" {% else %} data-toggle="tooltip" title="{{ item.title }}"
+                    class="menuitem" {% endif %}>
+                    {% if item.icon %}
+                    {% image item.icon fill-30x30 class="image-menu" %}
+                    {% else %}
+                    {{ item.title }}
+                    {% endif %}
+                  </a>
+                  {% if submenu %}
+                  <div class="dropdown-menu">
+                    {% for subitem in submenu %}
+                    <a href="{{ subitem.url }}"
+                      class="dropdown-item menuitem p-2 {% if subitem.icon %}menuicon{% endif %}">
+                      {% if subitem.icon %}
+                      {% image subitem.icon fill-30x30 class="image-menu" %}
+                      {% else %}
+                      {{ subitem.title }}
+                      {% endif %}
+                    </a>
+                    {% endfor %}
+                  </div>
+                  {% endif %}
+                </div>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+      </nav>
+      <!-- End Navbar -->
     </div>
   </div>
-</nav>
-<!-- End Navbar -->
-
-
+</div>

@@ -3,8 +3,6 @@
 {% load wagtailimages_tags static %}
 <section class="py-4">
   <div class="container">
-  <h3>{{self.title}}</h3>
-  <h6>{{self.subtitle}}</h6>
     <div class="row justify-space-between py-2">
       {% for card in self.Wave_card %}
       {% image card.image fill-320x320 as img %}

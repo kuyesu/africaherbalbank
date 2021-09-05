@@ -3,36 +3,43 @@
 {% load wagtailadmin_tags %}
 {% load wagtailimages_tags wagtailcore_tags %}
 {% block content %}
-{% image self.banner_image width-3560 as img%}
-<header class="header-2">
-    <div class="page-header min-vh-75 relative" style="background-image: url('{{ img.url }}')">
+{% image self.banner_image width-1320 as img%}
+
+
+<header>
+  {% image self.banner_image width-1320 as img%}
+    <div class="page-header min-vh-50" style="background-image: url('{{img.url}}')">
+      <span class="mask bg-gradient-dark" style="opacity: .1;"></span>
       <div class="container">
         <div class="row">
-          <div class="col-lg-7 text-center mx-auto">
-            <h1 class="text-white pt-3 mt-n5">{{ self.banner_title }}</h1>
-            <p class="lead text-white mt-3">{{self.banner_subtitle|richtext}}<br /> {{self.banner_subtitle|richtext}} </p>
+          <div class="col-lg-8 mx-auto text-white text-center">
+            <h2 class="text-white">{{self.banner_title}}</h2>
+            <p class="lead">{{self.banner_subtitle |richtext}}</p>
           </div>
         </div>
       </div>
-      <div class="position-absolute w-100 z-index-1 bottom-0">
-        <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 40" preserveAspectRatio="none" shape-rendering="auto">
-          <defs>
-            <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
-          </defs>
-          <g class="moving-waves">
-            <use xlink:href="#gentle-wave" x="48" y="-1" fill="rgba(255,255,255,0.40" />
-            <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.35)" />
-            <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.25)" />
-            <use xlink:href="#gentle-wave" x="48" y="8" fill="rgba(255,255,255,0.20)" />
-            <use xlink:href="#gentle-wave" x="48" y="13" fill="rgba(255,255,255,0.15)" />
-            <use xlink:href="#gentle-wave" x="48" y="16" fill="rgba(255,255,255,0.95" />
-          </g>
+    </div>
+    <div class="position-relative overflow-hidden" style="height:36px;margin-top:-35px;">
+      <div class="w-full absolute bottom-0 start-0 end-0" style="transform: scale(2);transform-origin: top center;color: #f8f9fa;">
+        <svg viewBox="0 0 2880 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 48H1437.5H2880V0H2160C1442.5 52 720 0 720 0H0V48Z" fill="currentColor"></path>
         </svg>
       </div>
     </div>
+    <div class="container">
+      <div class="row bg-white shadow mt-n6 border-radius-md py-4 p-3 position-relative">
+        <div class="col-md-10 mb-md-0 mb-2">
+          <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-search"></i></span>
+            <input type="text" class="form-control" placeholder="Search for your answer">
+          </div>
+        </div>
+        <div class="col-md-2 ps-md-0">
+          <button type="button" class="btn bg-gradient-primary w-100 mb-0 h-100 position-relative z-index-2">Search</button>
+        </div>
+      </div>
+    </div>
   </header>
-
-
   {% comment %} {% if self.works %} {% endcomment %}
     {% for block in self.works %}
       {% include_block block %}
