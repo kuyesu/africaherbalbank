@@ -27,7 +27,7 @@ from wagtail.core.fields import RichTextField, StreamField
 from wagtail.snippets.edit_handlers import SnippetChooserPanel
 from wagtail.snippets.models import register_snippet
 
-from wagtailtrans.models import Language
+# from wagtailtrans.models import Language
 
 
 # Create your models here.
@@ -100,8 +100,8 @@ class MenuItem(Orderable):
     def trans_url(self, language_code):
         if self.link_url:
             return '/' + language_code + self.link_url
-        # elif self.link_page:
-        #     return self.trans_page(language_code).url
+        elif self.link_page:
+            return self.trans_page(language_code).url
         return None
 
     @property

@@ -57,9 +57,6 @@ INSTALLED_APPS = [
     'wagtail_localize.locales',
 
     
-    'django_countries',
-    'wagtailtrans',
-    
 
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
@@ -75,8 +72,8 @@ INSTALLED_APPS = [
     'wagtail.images',
     'wagtail.search',
     'wagtail.admin',
-    'wagtail.core',
-    
+    'wagtail.core', # Only required when WAGTAILTRANS_LANGUAGES_PER_SITE=True
+    # 'wagtailtrans',
     
    
     'wagtailstreamforms',
@@ -104,10 +101,14 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     
+    'django_countries',
+    
 ]
 
 MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
+    # 'wagtail.core.middleware.SiteMiddleware',
+    # 'wagtailtrans.middleware.TranslationMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
