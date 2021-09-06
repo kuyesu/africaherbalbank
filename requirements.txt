@@ -10,3 +10,4 @@ django-widget-tweaks
 wagtailstreamforms
 django-modeltranslation
 django-recaptcha
+wagtail-django-recaptcha
