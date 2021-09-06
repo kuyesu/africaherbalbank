@@ -11,3 +11,7 @@ wagtailstreamforms
 django-modeltranslation
 django-recaptcha
 wagtail-django-recaptcha
+gunicorn
+whitenoise
+dj-database-url
+psycopg2
