@@ -1,11 +1,16 @@
+{# make sure these are at the top of the file #}
+{% load i18n wagtailcore_tags %}
 {% load wagtailimages_tags menu_tags %}
 
 {% get_menu "main" None request.user.is_authenticated as navigation %}
 {% load static %}
+
+
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-green bg-green" style="background-color: rgb(4, 46, 23);">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#" style="color: rgb(207, 217, 226); font-weight: 700; font-size: medium;">We are making and easing a research in herbal medicines</a>
+    <a class="navbar-brand" href="#" style="color: rgb(207, 217, 226); font-weight: 700; font-size: medium;">We are
+      making and easing a research in herbal medicines</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
       aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -13,13 +18,17 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#" style="color: rgb(207, 217, 226); font-weight: 700; font-size: medium;">Call: +(256) 750 955100 </a>
+          <a class="nav-link active" aria-current="page" href="#"
+            style="color: rgb(207, 217, 226); font-weight: 700; font-size: medium;">Call: +(256) 750 955100 </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#" style="color: rgb(207, 217, 226); font-weight: 700; font-size: medium;">Reach Us by Email: helpdesk@africaherbalbank.com</a>
+          <a class="nav-link" href="#" style="color: rgb(207, 217, 226); font-weight: 700; font-size: medium;">Reach Us
+            by Email: helpdesk@africaherbalbank.com</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#"style="color: rgb(207, 217, 226); font-weight: 700; font-size: medium;">Social Links: <i class="fa fa-facebook-official" aria-hidden="true"></i><i class="fa fa-twitter" aria-hidden="true"></i><i class="fa fa-whatsapp" aria-hidden="true"></i></a>
+          <a class="nav-link" href="#" style="color: rgb(207, 217, 226); font-weight: 700; font-size: medium;">Social
+            Links: <i class="fa fa-facebook-official" aria-hidden="true"></i><i class="fa fa-twitter"
+              aria-hidden="true"></i><i class="fa fa-whatsapp" aria-hidden="true"></i></a>
         </li>
       </ul>
     </div>
@@ -41,6 +50,9 @@
 
             AFRICA HERBAL BANK
           </a>
+
+
+
           <a href="https://www.creative-tim.com/product/soft-ui-design-system-pro#pricingCard"
             class="btn btn-sm  bg-gradient-primary  btn-round mb-0 ms-auto d-lg-none d-block">DONATE</a>
           <button class="navbar-toggler shadow-none ms-md-2" type="button" data-bs-toggle="collapse"
@@ -85,6 +97,31 @@
                 </div>
               </li>
               {% endfor %}
+            </ul>
+          </div>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class=" navbar-nav ml-auto mr-5">
+              <li class="nav-item {% if submenu %} dropdown {% endif %}p-2">
+                <div class="dropdown show">
+                  <a class="menuitem dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                    data-toggle="tooltip">Language</a>
+                  <div class="dropdown-menu">
+
+                    {% if page %}
+                    {% for translation in page.get_translations.live %}
+                    {% get_language_info for translation.locale.language_code as lang %}
+                    <a class="dropdown-item menuitem p-2 href=" {% pageurl translation %}" rel="alternate"
+                      hreflang="{{ language_code }}">
+                      {{ lang.name_local }}
+                    </a>
+                    {% endfor %}
+                    {% endif %}
+
+                  </div>
+
+                </div>
+              </li>
+
             </ul>
           </div>
       </nav>

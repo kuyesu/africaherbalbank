@@ -34,6 +34,7 @@ urlpatterns += i18n_patterns(
     path('sitemap.xml/', sitemap),
     path('accounts/', include('allauth.urls')),
     path('accounts/', include('userauth.urls')),
+    # path('chatbot/', include('chatbot.urls')),
     # path('language/', include('menu.urls')),
     path('comments/', include('django_comments_xtd.urls')),
 )
