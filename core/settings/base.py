@@ -107,6 +107,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     # 'wagtail.core.middleware.SiteMiddleware',
     # 'wagtailtrans.middleware.TranslationMiddleware',
     'django.middleware.common.CommonMiddleware',
