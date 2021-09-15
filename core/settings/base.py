@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'about',
     'blog',
     'contact',
+    'chatbot',
     'dashboard',
     'header',
     'helpcenter',
