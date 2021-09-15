@@ -1,4 +1,4 @@
-LOGIC_RESPONSE = {
+LOGIC_RESPONSES = {
     'account': [
         "You can find your account information"
     ],
