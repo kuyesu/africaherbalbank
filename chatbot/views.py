@@ -21,7 +21,7 @@ Come from the next step.
 
 """
 
-FB_ENDPOINT = 'https://graph.facebook.com/v4.0/'
+FB_ENDPOINT = 'https://graph.facebook.com/v12.0/'
 
 PAGE_ACCESS_TOKEN = "EAAqYtw8BzVoBAPhDgutNNtP0vEqi92fehfAULSs40jZCqsgIxqkESXgI0ctxDukQdPBY5LpGEVxaNriVv3nlLWrYpVsa41djJCG50xmTgjxGFXZCkr4gR7nKvISmAqZBtU22I4MFQL4nEb2c3DosmZAZAPn9QeBRwJG0bPr6TOsVi1EEUw1W7"  
 
