@@ -12,6 +12,7 @@ from .bot_logic import LOGIC_RESPONSES
 
 
 # this is the token verifer
+webhook_endpoint = "6c19a1c4e6dc3f500caa9dc0b2eff8131b2939d237f399b0386cf3c37da2"
 VERIFY_TOKEN = "f42cb9333ba30e22e350b98d285ab5ce6316bf74f557e55100"
 
 """
