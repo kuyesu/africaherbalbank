@@ -1,7 +1,12 @@
-from wagtail.core import blocks
+from django.db.models.deletion import CASCADE
+from django.db.models.fields.related import ForeignKey
+from wagtail.core.models import Page
+from wagtail.core import blocks, models
+from wagtail.core.blocks.field_block import PageChooserBlock
 from wagtail.core.templatetags.wagtailcore_tags import richtext
 from wagtail.images.blocks import ImageChooserBlock
 from wagtailstreamforms.blocks import WagtailFormBlock
+from contact.models import ContactPage
 
 class TitleAndTextBlock(blocks.StructBlock):
     """Title and text and nothing else."""
@@ -18,25 +23,27 @@ class TitleAndTextBlock(blocks.StructBlock):
 class CardBlock(blocks.StructBlock):
     """Cards with image and text and button(s)."""
 
-    title = blocks.CharBlock(required=True, help_text="Add your title")
+    banner_image_1 = ImageChooserBlock(required=True)
+    banner_title_1 = blocks.CharBlock(required=True, help_text="Add your title")
+    banner_text_1 = blocks.TextBlock(required=True, max_length=200)
+    
+    banner_image_2 = ImageChooserBlock(required=True)
+    banner_title_2 = blocks.CharBlock(required=True, help_text="Add your title")
+    banner_text_2= blocks.TextBlock(required=True, max_length=200)
+    
+    banner_image_3 = ImageChooserBlock(required=True)
+    banner_title_3 = blocks.CharBlock(required=True, help_text="Add your title")
+    banner_text_3 = blocks.TextBlock(required=True, max_length=200)
+    
+    banner_image_4 = ImageChooserBlock(required=True)
+    banner_title_4 = blocks.CharBlock(required=True, help_text="Add your title")
+    banner_text_4 = blocks.TextBlock(required=True, max_length=200)
+    
+    banner_image_5 = ImageChooserBlock(required=True)
+    banner_title_5 = blocks.CharBlock(required=True, help_text="Add your title")
+    banner_text_5 = blocks.TextBlock(required=True, max_length=200)
+    
 
-    cards = blocks.ListBlock(
-        blocks.StructBlock(
-            [
-                ("image", ImageChooserBlock(required=True)),
-                ("title", blocks.CharBlock(required=True, max_length=140)),
-                ("text", blocks.TextBlock(required=True, max_length=200)),
-                ("button_page", blocks.PageChooserBlock(required=False)),
-                (
-                    "button_url",
-                    blocks.URLBlock(
-                        required=False,
-                        help_text="If the button page above is selected, that will be used first.",  # noqa
-                    ),
-                ),
-            ]
-        )
-    )
 
     class Meta:  # noqa
         template = "streams/card/card_staff.html"
@@ -70,23 +77,21 @@ class Works(blocks.StructBlock):
 
 
 """Home page Section Popular herbs"""
+
+
 class UpConingEvents(blocks.StructBlock):
     title = blocks.CharBlock(required=True, help_text="Add your title")
     brief_description = blocks.TextBlock(required=True, help_text="Add additional text")
+    # apply = WagtailFormBlock()
+    # application_form = ContactPage()
     upcoming_events = blocks.ListBlock(
         blocks.StructBlock(
             [
                 ("image", ImageChooserBlock(required=True)),
                 ("title", blocks.CharBlock(required=True, max_length=125)),
                 ("text", blocks.TextBlock(required=True)),
-                ("button_page", blocks.PageChooserBlock(required=False)),
-                (
-                    "button_url",
-                    blocks.URLBlock(
-                        required=False,
-                        help_text="If the button page above is selected, that will be used first.",  # noqa
-                    ),
-                ),
+                
+                
             ]
         )
     )
@@ -136,15 +141,8 @@ class SlidingImage(blocks.StructBlock):
         blocks.StructBlock(
             [
                 ("image", ImageChooserBlock(required=True)),
-                ("title", blocks.CharBlock(required=True)),
-                ("button_page", blocks.PageChooserBlock(required=False)),
-                (
-                    "button_url",
-                    blocks.URLBlock(
-                        required=False,
-                        help_text="If the button page above is selected, that will be used first.",  # noqa
-                    ),
-                ),
+                
+                
             ]
         )
     )
@@ -428,7 +426,16 @@ class CardImage(blocks.StructBlock):
             [
                 ("title", blocks.CharBlock(required=True, max_length=140)),
                 ("text", blocks.TextBlock(required=True, max_length=200)),
-                ("image", ImageChooserBlock(required=True)),
+                ("banner_image", ImageChooserBlock(required=True)),
+                ("fancy_herb_image", blocks.ListBlock(
+                    blocks.StructBlock(
+                         [
+                        ("image", ImageChooserBlock(required=True))
+                    ],
+                    required=True,
+                    )
+                   
+                )),
                 ("button_page", blocks.PageChooserBlock(required=False)),
                 (
                     "button_url",
@@ -443,7 +450,7 @@ class CardImage(blocks.StructBlock):
     class Meta: # noqa
         template = "streams/card/image_card.html"
         icon = "image"
-        label = "Image Card"
+        label = "Card with Image Card"
 
 class CardTeam(blocks.StructBlock):
     title = blocks.CharBlock(required=True, help_text="Add your title")
@@ -507,24 +514,18 @@ class CardActivity(blocks.StructBlock):
     Activities_card = blocks.ListBlock(
         blocks.StructBlock(
             [
-                ("title", blocks.CharBlock(required=True, max_length=140)),
+                ("project", blocks.CharBlock(required=True, max_length=140)),
                 ("text", blocks.TextBlock(required=True, max_length=200)),
-                ("image", ImageChooserBlock(required=True)),
+                ("stats", blocks.IntegerBlock(required=True)), 
                 ("button_page", blocks.PageChooserBlock(required=False)),
-                (
-                    "button_url",
-                    blocks.URLBlock(
-                        required=False,
-                        help_text="If the button page above is selected, that will be used first.",  # noqa
-                    ),
-                ),
+                
             ]
         )
     )
     class Meta: # noqa
         template = "streams/card/activity_card.html"
         icon = "doc-full"
-        label = "Activity Card"
+        label = "Our Srvices"
 
 class CardTestimonies(blocks.StructBlock):
     title = blocks.CharBlock(required=True, help_text="Add your title")
@@ -611,13 +612,12 @@ class Technologies(blocks.StructBlock):
         label = "Technology"
         
 class Testimonies(blocks.StructBlock):
-    title = blocks.CharBlock(required=True, help_text="Add your title")
+    title = blocks.CharBlock(required=True, max_legngth=80, help_text="Add your title")
+    subtitle = blocks.TextBlock(required=True, max_legngth=100, help_text="Add your subtitle")
 
     Testimonies_FrOm_user = blocks.ListBlock(
         blocks.StructBlock(
             [
-                ("title", blocks.CharBlock(required=True, max_length=240)),
-                ("subtitle", blocks.CharBlock(required=True, max_length=240)),
                 
                 ("image", ImageChooserBlock(required=True)),
                 ("Name", blocks.CharBlock(required=True, max_length=40)),
@@ -834,31 +834,22 @@ class BannerCurveOpacity(blocks.StructBlock):
 
 
 
-class RichtextBlock(blocks.RichTextBlock):
+class RichtextBlock(blocks.StructBlock):
     """Richtext with all the features."""
-
-    def get_api_representation(self, value, context=None):
-        return richtext(value.source)
-
+    comment = blocks.RichTextBlock(required=True, help_text="Add your title")
     class Meta:  # noqa
-        template = "streams/richtext_block.html"
+        template = "streams/richtext_block_copy.html"
         icon = "doc-full"
         label = "Full RichText"
 
 
-class SimpleRichtextBlock(blocks.RichTextBlock):
-    """Richtext without (limited) all the features."""
-
-    def __init__(
-        self, required=True, help_text=None, editor="default", features=None, **kwargs
-    ):  # noqa
-        super().__init__(**kwargs)
-        self.features = ["bold", "italic", "link"]
+class SimpleRichtextBlock(blocks.StructBlock):
+    comment = blocks.TextBlock(required=True, help_text="Add your title")
 
     class Meta:  # noqa
         template = "streams/richtext_block.html"
-        icon = "edit"
-        label = "Simple RichText"
+        icon = "comment"
+        label = "Comment"
 
 
 class CTABlock(blocks.StructBlock):

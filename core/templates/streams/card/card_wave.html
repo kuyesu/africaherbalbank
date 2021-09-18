@@ -6,7 +6,7 @@
     <div class="row justify-space-between py-2">
       {% for card in self.Wave_card %}
       {% image card.image fill-320x320 as img %}
-      <div class="col-md-3 mt-4">
+      <div class="col-md-4 mt-4">
         <div class="card">
           <img class="card-img-top" src="{{img.url}}">
           <div class="position-relative " style="height:35px;margin-top:-50px;">
@@ -31,9 +31,17 @@
             <p>
               {{card.text}}
             </p>
-            <a href="javascript:;" class="text-primary icon-move-right">More about us
-              <i class="fas fa-arrow-right text-xs ms-1" aria-hidden="true"></i>
-            </a>
+            {% if card.button_page %}
+                        <a href="{{ card.button_page.url }}" class="font-weight-bold text-xs text-uppercase font-weight-bolder text-success icon-move-right">
+                            Learn More
+                        </a>
+                        <i class="fas fa-arrow-right text-xs ms-1"></i>
+                    {% elif card.button_url %}
+                        <a href="{{ card.button_url }}" class="font-weight-bold text-xs text-uppercase font-weight-bolder text-success icon-move-right">
+                            Findout More
+                        </a>
+                        <i class="fas fa-arrow-right text-xs ms-1"></i>
+                    {% endif %}
           </div>
         </div>
       </div>

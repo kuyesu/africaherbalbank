@@ -1,23 +1,21 @@
-{% load wagtailcore_tags wagtailimages_tags %}
 
-{% for Sliding_Image in self.Sliding_Images %} 
-{% image Sliding_Image.image fill-300x200 as img%}   
-<div class="item">
-<a data-rel="prettyPhoto" href="{{img.url}}">
-  <img class="lazyOwl" src="{{img.url}}" data-src="{{img.url}}" alt="{{img.alt}}">
-    <div>
-      <small>{{Sliding_Image.title}}</small>
-      <span>{{Sliding_Images.text}}</span>
-      <i class="fa fa-search">
-      {% if Sliding_Image.button_page %}
-        <a href="{{ Sliding_Image.button_page.url}}"></a> 
-      {% elif Sliding_Image.button_url%}
-        <a href="{{ Sliding_Image.button_url.url}}"></a> 
 
-      {% endif %}
-          </i>
+{% load static %}
+{% load wagtailimages_tags static %}
+<div class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 mx-auto text-center content-center" >
+          <h4 class="font-weight-bolder"> {{self.title}}</h4>
+        </div>
       </div>
-  </a>
-</div>
-
-{% endfor %} 
+      <div class="row mt-4" style="align-items: center; align-content: center; justify-content: center;">
+      {% for card in self.Sliding_Images %}
+      {% image card.image fill-320x320 as img %}
+        <div class="col-lg-3 col-md-4 col-12 mb-4" style="align-items: center; align-content: center; justify-content: center;">
+          <img class="w-100 opacity-9" src="{{img.url}}" alt="{{img.alt}}">
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>

@@ -1,39 +1,39 @@
 <!-- -------- START HEADER 8 w/ card over right bg image ------- -->
 {% load static %}
-{% load wagtailimages_tags static %}
-{% image card.image fill-320x320 as img %}
+{% load wagtailimages_tags wagtailcore_tags %}
+{% for card in self.Image_Card%}
 <header>
   <div class="page-header min-vh-85">
     <div>
-      <img class="position-absolute fixed-top ms-auto w-50 h-100 z-index-0 d-none d-sm-none d-md-block border-radius-section border-top-end-radius-0 border-top-start-radius-0 border-bottom-end-radius-0" src="{{img.url}}" alt="img.alt">
+    {% image card.banner_image fill-320x320 as img %}
+      <img class="position-absolute fixed-top ms-auto w-50 h-100 z-index-0 d-none d-sm-none d-md-block border-radius-section border-top-end-radius-0 border-top-start-radius-0 border-bottom-end-radius-0" src="{{img.url}}" alt="{{img.alt}}">
     </div>
     <div class="container">
       <div class="row">
         <div class="col-lg-7 d-flex">
           <div class="card card-body blur text-md-start text-center px-sm-5 shadow-lg mt-sm-5 py-sm-5">
-            <h2 class="text-gradient text-primary mb-0">Soft Design System.</h2>
-            <h2 class="text-dark mb-4">Choose the best</h2>
+            <h2 class="text-gradient text-primary mb-0">{{self.title}}</h2>
+            <h2 class="text-dark mb-4">{{card.title}}</h2>
 
             <p class="lead text-dark pe-md-5 me-md-5">
-              Find the story of Creative Tim&#39;s most complex design system and
-              all the work that make this design available.
+              {{card.text}}.
             </p>
             <div class="buttons">
-              <button type="button" class="btn btn-rounded bg-gradient-primary mt-4">Contact Us</button>
-              <button type="button" class="btn btn-rounded btn-outline-secondary mt-4 ms-2">Read More</button>
-            </div>
+              {% if card.button_page %}
+                        <a href="{{ card.button_page.url }}" class="font-weight-bold text-xs text-uppercase font-weight-bolder text-success icon-move-right">
+                            Learn More
+                        </a>
+                        <i class="fas fa-arrow-right text-xs ms-1"></i>
+                    {% elif card.button_url %}
+                        <a href="{{ card.button_url }}" class="font-weight-bold text-xs text-uppercase font-weight-bolder text-success icon-move-right">
+                            Findout More
+                        </a>
+                        <i class="fas fa-arrow-right text-xs ms-1"></i>
+                    {% endif %}</div>
             <div class="row mt-2">
               <div class="col-md-3 col-6 p-0">
-                <img class="w-100" src="{% static "assets/img/logos/gray-logos/logo-pinterest.svg"%}" alt="logo">
-              </div>
-              <div class="col-md-3 col-6 p-0">
-                <img class="w-100" src="{% static "assets/img/logos/gray-logos/logo-netflix.svg"%}" alt="logo">
-              </div>
-              <div class="col-md-3 col-6 p-0">
-                <img class="w-100" src="{% static "assets/img/logos/gray-logos/logo-coinbase.svg"%}" alt="logo">
-              </div>
-              <div class="col-md-3 col-6 p-0">
-                <img class="w-100" src="{% static "assets/img/logos/gray-logos/logo-nasa.svg"%}" alt="logo">
+              {% image card.fancy_herb_image.image fill-320x320 as img %}
+                <img class="w-100" src="{{img.url}}" alt="{{img.alt}}">
               </div>
             </div>
           </div>
@@ -42,4 +42,6 @@
     </div>
   </div>
 </header>
+
+{% endfor %}
 <!-- -------- END HEADER 8 w/ card over right bg image ------- -->
